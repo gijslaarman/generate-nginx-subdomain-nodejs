@@ -26,7 +26,7 @@ EOF
 
 ln -s $NGINX_AVAILABLE_SITES/$DOMAIN $NGINX_ENABLED_SITES/$DOMAIN
 
-read -p "A restart to Nginx is required for the subdomain to be defined. Do you wish to restart nginx? (y/$
+read -p "A restart to Nginx is required for the subdomain to be defined. Do you wish to restart nginx? (y/n): " prompt
 if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
 then
   /etc/init.d/nginx restart;
