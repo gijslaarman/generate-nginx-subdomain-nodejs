@@ -33,3 +33,11 @@ then
 fi
 
 ok "Subdomain created for $DOMAIN."
+
+read -p "Would you like to install a SSL certificate? (certbot) (y/n): " prompt
+if [[ $prompt == "y" || $prompt == "Y" || $prompt == "yes" || $prompt == "Yes" ]]
+then
+  certbot --nginx -d $DOMAIN;
+fi
+
+ok "Subdomain secured with SSL"
