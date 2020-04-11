@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ok() { echo -e '\e[32m'$1'\e[m'; } # Green
+
 # Variable definitions
 DOMAIN=$1
 PORT=$2
@@ -14,10 +16,10 @@ server {
         location / {
                 proxy_pass http://localhost:$PORT;
                 proxy_http_version 1.1;
-                proxy_set_header Upgrade '$http_upgrade';
+                proxy_set_header Upgrade \$http_upgrade;
                 proxy_set_header Connection 'upgrade';
-                proxy_set_header Host '$host';
-                proxy_cache_bypass '$http_upgrade';
+                proxy_set_header Host \$host;
+                proxy_cache_bypass \$http_upgrade;
         }
 }
 EOF
@@ -30,19 +32,4 @@ then
   /etc/init.d/nginx restart;
 fi
 
-"Subdomain created for $DOMAIN."
-
-
-
-# server {
-#         server_name subdomain.gijsbertcharles.com;
-
-#         location / {
-#                 proxy_pass http://localhost:3000;
-#                 proxy_http_version 1.1;
-#                 proxy_set_header Upgrade $http_upgrade;
-#                 proxy_set_header Connection 'upgrade';
-#                 proxy_set_header Host $host;
-#                 proxy_cache_bypass $http_upgrade;
-#         }
-# }
+ok "Subdomain created for $DOMAIN."
